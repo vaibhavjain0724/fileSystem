@@ -18,6 +18,13 @@ bool filePathExists(fs::path& filePath){
     return fs::exists(filePath);
 }
 
+
+bool Upload(fs::path& filePath){
+    //
+    return false;
+}
+
+
 void tempPrint(fs::path& filePath){
     std::ifstream input;
 
@@ -29,17 +36,15 @@ void tempPrint(fs::path& filePath){
         return;
     }
     int lineNumber = 0;
-    while(std::getline(filePath, lineNumber)){
-        std::cout << lineNumber << ": ";
-        std::cout << std::getline(filePath, lineNumber) << std::endl;
+    std::string line;
+
+    while(std::getline(input, line)){
+        std::cout << lineNumber << ": " << line << std::endl;
+        lineNumber++;
+
     }
 
     input.close();
-}
-
-bool Upload(fs::path& filePath){
-    //
-    return false;
 }
 
 int main(int argc , char* argv[]){
