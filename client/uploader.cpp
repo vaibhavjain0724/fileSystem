@@ -17,7 +17,13 @@ void uploadFile(const fs::path& path,const std::string& newFileName){
 
     std::ofstream output;
 
-    output.open("./server_data/storage/" + newFileName);
+    fs::path storageDirectory("./server_data/storage");
+
+    fs::path fileName(newFileName);
+
+    fs::path destination = storageDirectory / fileName;
+
+    output.open(destination);
 
     std::string line;
 
