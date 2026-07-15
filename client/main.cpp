@@ -1,8 +1,8 @@
-
 #include <iostream>
 #include <filesystem>
 #include <fstream>
 #include <string>
+#include "uploader.h"
 namespace fs = std::filesystem;
 
 
@@ -19,10 +19,7 @@ bool filePathExists(fs::path& filePath){
 }
 
 
-bool Upload(fs::path& filePath){
-    //
-    return false;
-}
+
 
 
 void tempPrint(fs::path& filePath){
@@ -49,8 +46,8 @@ void tempPrint(fs::path& filePath){
 
 int main(int argc , char* argv[]){
     
-    if(argc != 2){
-        std::cout << "format: 'file path'" << std::endl;
+    if(argc != 3){
+        std::cout << "format: 'file path' 'name of new file'" << std::endl;
         return -1;
     }
 
@@ -73,6 +70,7 @@ int main(int argc , char* argv[]){
     tempPrint(filePath);
 
     //Upload
-    Upload(filePath);
+    std::string newFileName = argv[2];
+    uploadFile(filePath, newFileName);
 }
 
