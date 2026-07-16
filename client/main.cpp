@@ -46,8 +46,8 @@ void tempPrint(fs::path& filePath){
 
 int main(int argc , char* argv[]){
     
-    if(argc != 3){
-        std::cout << "format: 'file path' 'name of new file'" << std::endl;
+    if(argc != 2){
+        std::cout << "format: 'file path'" << std::endl;
         return -1;
     }
 
@@ -67,10 +67,10 @@ int main(int argc , char* argv[]){
     std::cout << filePath << std::endl;
 
     //
-    tempPrint(filePath);
+    // tempPrint(filePath);
 
     //Upload
-    std::string newFileName = argv[2];
-    uploadFile(filePath, newFileName);
+    // std::string newFileName = argv[2];
+    uploadFile(filePath);
 }
 

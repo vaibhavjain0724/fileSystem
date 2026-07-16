@@ -1,51 +1,20 @@
 #include "uploader.h"
-#include <iostream>
 #include <filesystem>
-#include <fstream>
-#include <string>
-
+#include "file_copier.h"
+#include <iostream>
 
 namespace fs = std::filesystem;
 
-const static int BUFFER_SIZE = 4096;
 
-void uploadFile(const fs::path& path,const std::string& newFileName){
-    std::ifstream input;
-    input.open(path);
-
-    if(input.is_open() == false){
-        std::cout << "error opening file" << std::endl;
-        return;
-    }
-
-    std::ofstream output;
-
+void uploadFile(const fs::path& path){
+    fs::path newFileName = path.filename();
     fs::path storageDirectory("./server_data/storage");
+    fs::path destination = storageDirectory / newFileName;
 
-    fs::path fileName(newFileName);
-
-    fs::path destination = storageDirectory / fileName;
-
-    output.open(destination);
-
-
-    //!old line by line copying logic
-    // std::string line;
-
-    // while(std::getline(input, line)){
-    //     output << line << std::endl;
-
-    // }
-
-    char buffer[BUFFER_SIZE];
-    input.read(buffer, BUFFER_SIZE);
-    while(input.gcount()){
-        output.write(buffer, input.gcount());
-        input.read(buffer, BUFFER_SIZE);
-
+    if(copyFile(path , destination )){
+        std::cout << "Success" << std::endl;
     }
-
-    input.close();
+    else  std::cout << "Failed" << std::endl;
 
 
 

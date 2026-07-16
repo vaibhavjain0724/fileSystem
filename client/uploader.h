@@ -5,5 +5,4 @@
 
 namespace fs = std::filesystem;
 
-void uploadFile(const fs::path& path,
-                const std::string& newFileName);
+void uploadFile(const fs::path& path);
