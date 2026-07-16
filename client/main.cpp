@@ -4,6 +4,8 @@
 #include <string>
 #include "uploader.h"
 #include "downloader.h"
+#include "list_files.h"
+
 namespace fs = std::filesystem;
 
 
@@ -106,7 +108,7 @@ int main(int argc, char* argv[]){
         downloadFile(filePath);
     }
     else if(command == "View" || command == "view"){
-
+        listFiles();
     }
     else{
          std::cout << "Download / Upload / View" << std::endl;
