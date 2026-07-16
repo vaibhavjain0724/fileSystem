@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include "uploader.h"
+#include "downloader.h"
 namespace fs = std::filesystem;
 
 
@@ -44,33 +45,71 @@ void tempPrint(fs::path& filePath){
     input.close();
 }
 
-int main(int argc , char* argv[]){
+// int main(int argc , char* argv[]){
     
-    if(argc != 2){
-        std::cout << "format: 'file path'" << std::endl;
-        return -1;
+//     if(argc != 2){
+//         std::cout << "format: 'file path'" << std::endl;
+//         return -1;
+//     }
+
+//     //store path in filePath
+//     fs::path filePath;
+//     filePath = filePathRead(argv[1]);
+
+//     //check if valid
+//     bool validPath;
+//     validPath = filePathExists(filePath);
+
+//     if(validPath == false){
+//         std::cout << "Invalid File Path" << std::endl;
+//         return -1;
+//     }
+
+//     std::cout << filePath << std::endl;
+
+//     //
+//     // tempPrint(filePath);
+
+//     //Upload
+//     // std::string newFileName = argv[2];
+//     uploadFile(filePath);
+// }
+
+
+int main(int argc, char* argv[]){
+    if(argc < 2){
+        std::cout << "Download 'file name' / Upload 'path' / View" << std::endl;
     }
 
-    //store path in filePath
-    fs::path filePath;
-    filePath = filePathRead(argv[1]);
+    std::string command = argv[1];
 
-    //check if valid
-    bool validPath;
-    validPath = filePathExists(filePath);
+    if(command == "Upload" || command == "upload"){
+        //store path in filePath
+        fs::path filePath;
+        filePath = filePathRead(argv[2]);
 
-    if(validPath == false){
-        std::cout << "Invalid File Path" << std::endl;
-        return -1;
+        //check if valid
+        bool validPath;
+        validPath = filePathExists(filePath);
+
+        if(validPath == false){
+            std::cout << "Invalid File Path" << std::endl;
+            return -1;
+        }
+
+        uploadFile(filePath);
     }
+    
+    else if(command == "Download" || command == "download"){
+        fs::path filePath;
+        filePath = filePathRead(argv[2]);
+        downloadFile(filePath);
+    }
+    else if(command == "View" || command == "view"){
 
-    std::cout << filePath << std::endl;
-
-    //
-    // tempPrint(filePath);
-
-    //Upload
-    // std::string newFileName = argv[2];
-    uploadFile(filePath);
+    }
+    else{
+         std::cout << "Download / Upload / View" << std::endl;
+    }
+    
 }
-
